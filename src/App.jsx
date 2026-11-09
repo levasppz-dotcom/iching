@@ -1598,6 +1598,16 @@ export default function App() {
       });
       setReadingResult(fallback);
       setReadingSource('canonical');
+      setHistory((prev) => [{
+  id: Date.now(),
+  date: new Date().toLocaleString('ru-RU'),
+  question: effectiveQuestion,
+  schoolId: customSchoolId,
+  lines: currentLines,
+  primaryNum: resolved.primaryHex.num,
+  transformedNum: resolved.transformedHex?.num || null,
+  reading: fallback
+}, ...prev].slice(0, 25));
     } finally {
       setIsGeneratingReading(false);
       setTimeout(() => {
